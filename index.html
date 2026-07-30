@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Room: Decisiones Docentes en Ciencias Sociales</title>
+    <style>
+        :root {
+            --primary-color: #1b365d;
+            --secondary-color: #4a7c59;
+            --background: #f4f7f6;
+            --text-color: #333;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: var(--primary-color);
+        }
+        .station {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background-color: #122643;
+        }
+        .error-msg {
+            color: #d9534f;
+            display: none;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .clue-box {
+            background-color: #e9ecef;
+            border-left: 5px solid var(--secondary-color);
+            padding: 15px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        select, textarea, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .radio-group label, .checkbox-group label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        .grid-table {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        .final-phrase {
+            font-size: 24px;
+            color: var(--secondary-color);
+            text-align: center;
+            font-weight: bold;
+            padding: 20px;
+            border: 2px dashed var(--secondary-color);
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- INTRO -->
+    <div id="intro" class="station active">
+        <h1>Escape Room: Decisiones Docentes</h1>
+        <p>Bienvenidos al desafío final del curso. En lugar de evaluar la memoria, este recorrido pondrá a prueba sus decisiones didácticas. Cada estación representa un paso clave en el diseño de una propuesta de enseñanza en Ciencias Sociales.</p>
+        <p>Al superar cada estación, irán recolectando fragmentos o pistas. Si logran completar las cinco estaciones, desbloquearán la <strong>Frase Final</strong> que deberán compartir en la puesta en común para demostrar que lograron escapar.</p>
+        <button class="btn" onclick="showStation('intro', 'station1')">Comenzar el Desafío</button>
+    </div>
+
+    <!-- ESTACIÓN 1 -->
+    <div id="station1" class="station">
+        <h2>Estación 1: El Concepto</h2>
+        <p>Para empezar a enseñar, los conceptos son fundamentales. A continuación, asocia cada atributo con el concepto correspondiente.</p>
+        
+        <div class="form-group">
+            <label>1. Desplazamiento de población que implica un cambio de residencia habitual:</label>
+            <select id="s1_q1">
+                <option value="">Seleccione...</option>
+                <option value="patrimonio">Patrimonio</option>
+                <option value="turismo">Turismo</option>
+                <option value="problema">Problema ambiental</option>
+                <option value="migracion">Migración</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>2. Conjunto de bienes materiales e inmateriales heredados con valor identitario:</label>
+            <select id="s1_q2">
+                <option value="">Seleccione...</option>
+                <option value="patrimonio">Patrimonio</option>
+                <option value="turismo">Turismo</option>
+                <option value="problema">Problema ambiental</option>
+                <option value="migracion">Migración</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>3. Desplazamiento temporal de personas con fines de ocio, descanso o cultura:</label>
+            <select id="s1_q3">
+                <option value="">Seleccione...</option>
+                <option value="patrimonio">Patrimonio</option>
+                <option value="turismo">Turismo</option>
+                <option value="problema">Problema ambiental</option>
+                <option value="migracion">Migración</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>4. Alteración negativa del entorno generada principalmente por impacto antrópico:</label>
+            <select id="s1_q4">
+                <option value="">Seleccione...</option>
+                <option value="patrimonio">Patrimonio</option>
+                <option value="turismo">Turismo</option>
+                <option value="problema">Problema ambiental</option>
+                <option value="migracion">Migración</option>
+            </select>
+        </div>
+
+        <p id="error1" class="error-msg">Revisa tus respuestas, hay conceptos mal asignados.</p>
+        <button class="btn" onclick="validateStation1()">Validar y Avanzar</button>
+    </div>
+
+    <!-- ESTACIÓN 2 -->
+    <div id="station2" class="station">
+        <h2>Estación 2: Las Fuentes</h2>
+        <div class="clue-box">
+            <strong>Pista obtenida:</strong> "Los conceptos organizan la explicación."
+        </div>
+        <p>Se presenta el caso de la acumulación masiva de <strong>sargazo</strong> en las costas. Deben seleccionar qué fuentes utilizarían para trabajarlo en clase y justificar su decisión didáctica.</p>
+        
+        <div class="checkbox-group">
+            <label><input type="checkbox" class="s2_source" value="fotografia"> Fotografía</label>
+            <label><input type="checkbox" class="s2_source" value="noticia"> Noticia periodística</label>
+            <label><input type="checkbox" class="s2_source" value="grafico"> Gráfico estadístico</label>
+            <label><input type="checkbox" class="s2_source" value="mapa"> Mapa</label>
+            <label><input type="checkbox" class="s2_source" value="publicidad"> Publicidad turística</label>
+            <label><input type="checkbox" class="s2_source" value="entrevista"> Entrevista a un actor local</label>
+        </div>
+
+        <div class="form-group" style="margin-top: 15px;">
+            <label>No alcanza con marcar. ¿Por qué eligieron esas fuentes específicas para este problema?</label>
+            <textarea id="s2_justification" placeholder="Escriban su justificación aquí..."></textarea>
+        </div>
+
+        <p id="error2" class="error-msg">Deben seleccionar al menos una fuente y redactar una breve justificación.</p>
+        <button class="btn" onclick="validateStation2()">Validar y Avanzar</button>
+    </div>
+
+    <!-- ESTACIÓN 3 -->
+    <div id="station3" class="station">
+        <h2>Estación 3: La Consigna</h2>
+        <p>Se muestran tres posibles consignas para abordar el caso del sargazo.</p>
+        
+        <div class="radio-group clue-box">
+            <label><input type="radio" name="s3_consigna" value="A"> A) ¿Qué es el sargazo?</label>
+            <label><input type="radio" name="s3_consigna" value="B"> B) Observa la fotografía detalladamente.</label>
+            <label><input type="radio" name="s3_consigna" value="C"> C) A partir de las distintas fuentes, explica por qué el sargazo constituye un problema ambiental.</label>
+        </div>
+
+        <div class="form-group">
+            <label>¿Cuál de estas consignas permite realmente construir una explicación?</label>
+        </div>
+
+        <div class="form-group">
+            <label>Clasifiquen esa consigna según la tipología trabajada (recuperando aportes de Moro y Espósito) y expliquen por qué:</label>
+            <textarea id="s3_justification" placeholder="Clasificación y justificación..."></textarea>
+        </div>
+
+        <p id="error3" class="error-msg">Deben seleccionar la consigna correcta (la que exige explicación) y escribir la clasificación.</p>
+        <button class="btn" onclick="validateStation3()">Validar y Avanzar</button>
+    </div>
+
+    <!-- ESTACIÓN 4 -->
+    <div id="station4" class="station">
+        <h2>Estación 4: La Evaluación</h2>
+        <p>Tienen ante ustedes una producción ficticia de un estudiante sobre el sargazo. No pondrán nota numérica.</p>
+        <p>¿Qué devolución (retroalimentación) escribirían para ayudar al estudiante a seguir aprendiendo?</p>
+        
+        <div class="radio-group">
+            <label><input type="radio" name="s4_feedback" value="mal"> "No sirve, debes hacerlo de nuevo."</label>
+            <label><input type="radio" name="s4_feedback" value="bien"> "Muy bien."</label>
+            <label><input type="radio" name="s4_feedback" value="regular"> "Regular."</label>
+            <label><input type="radio" name="s4_feedback" value="necesitas"> "Necesitas explicar mejor el tema."</label>
+            <label><input type="radio" name="s4_feedback" value="correcta"> "Observaste correctamente los daños en la costa, ahora intenta relacionar esa información con las actividades económicas de la zona."</label>
+        </div>
+
+        <div class="form-group" style="margin-top: 15px;">
+            <label>Justifiquen su elección (recuperando aportes de Perrenoud sobre evaluación formativa):</label>
+            <textarea id="s4_justification" placeholder="Justificación..."></textarea>
+        </div>
+
+        <p id="error4" class="error-msg">Deben elegir la retroalimentación que realmente andamia el aprendizaje y justificarla.</p>
+        <button class="btn" onclick="validateStation4()">Validar y Avanzar</button>
+    </div>
+
+    <!-- ESTACIÓN 5 -->
+    <div id="station5" class="station">
+        <h2>Estación 5: El Desafío Final</h2>
+        <p>Han recolectado todas las herramientas. Ahora aparecen cinco tarjetas: <strong>concepto, fuentes, imagen, consigna, evaluación</strong>.</p>
+        <p>La misión final: Construyan un esbozo de actividad para cuarto año. Completen la siguiente tabla.</p>
+        
+        <div class="grid-table">
+            <div class="form-group">
+                <label>Concepto a trabajar:</label>
+                <input type="text" id="s5_concepto">
+            </div>
+            <div class="form-group">
+                <label>Fuente/s seleccionada/s:</label>
+                <input type="text" id="s5_fuente">
+            </div>
+            <div class="form-group">
+                <label>Consigna para el alumno:</label>
+                <textarea id="s5_consigna" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Evidencia de aprendizaje esperada:</label>
+                <textarea id="s5_evidencia" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+                <label>¿Cómo retroalimentarían un obstáculo previsible?</label>
+                <textarea id="s5_retro" rows="2"></textarea>
+            </div>
+        </div>
+
+        <p id="error5" class="error-msg">Deben completar todos los campos de la matriz didáctica.</p>
+        <button class="btn" onclick="validateStation5()">Enviar Actividad</button>
+    </div>
+
+    <!-- FINAL -->
+    <div id="final" class="station">
+        <h2>¡Misión Cumplida!</h2>
+        <p>Han logrado articular los conceptos, las fuentes, las consignas y la evaluación en un diseño coherente.</p>
+        <p>Para demostrar que han finalizado exitosamente el Escape Room al regresar al plenario de Zoom, utilicen la siguiente frase secreta:</p>
+        
+        <div class="final-phrase">
+            "La evaluación continúa siendo reflexión sobre la práctica."
+        </div>
+
+        <div class="clue-box" style="margin-top: 30px;">
+            <strong>Instrucciones para el plenario:</strong><br>
+            No presenten toda la actividad. Su grupo deberá compartir <strong>únicamente una decisión</strong>. Por ejemplo: <em>"Elegimos una consigna procesual porque..."</em> o <em>"Elegimos tal fuente porque..."</em>.<br><br>
+            Pensemos: ¿Qué decisiones fueron las más difíciles de tomar como equipo? ¿Qué cambió en su manera de pensar una actividad?
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function showStation(hideId, showId) {
+        document.getElementById(hideId).classList.remove('active');
+        document.getElementById(showId).classList.add('active');
+        window.scrollTo(0,0);
+    }
+
+    function validateStation1() {
+        const q1 = document.getElementById('s1_q1').value;
+        const q2 = document.getElementById('s1_q2').value;
+        const q3 = document.getElementById('s1_q3').value;
+        const q4 = document.getElementById('s1_q4').value;
+
+        if(q1 === 'migracion' && q2 === 'patrimonio' && q3 === 'turismo' && q4 === 'problema') {
+            document.getElementById('error1').style.display = 'none';
+            showStation('station1', 'station2');
+        } else {
+            document.getElementById('error1').style.display = 'block';
+        }
+    }
+
+    function validateStation2() {
+        const checkboxes = document.querySelectorAll('.s2_source:checked');
+        const justification = document.getElementById('s2_justification').value;
+
+        if(checkboxes.length > 0 && justification.length > 10) {
+            document.getElementById('error2').style.display = 'none';
+            showStation('station2', 'station3');
+        } else {
+            document.getElementById('error2').style.display = 'block';
+        }
+    }
+
+    function validateStation3() {
+        const radios = document.getElementsByName('s3_consigna');
+        let selected = Array.from(radios).find(r => r.checked);
+        const justification = document.getElementById('s3_justification').value;
+
+        if(selected && selected.value === 'C' && justification.length > 5) {
+            document.getElementById('error3').style.display = 'none';
+            showStation('station3', 'station4');
+        } else {
+            document.getElementById('error3').style.display = 'block';
+        }
+    }
+
+    function validateStation4() {
+        const radios = document.getElementsByName('s4_feedback');
+        let selected = Array.from(radios).find(r => r.checked);
+        const justification = document.getElementById('s4_justification').value;
+
+        if(selected && selected.value === 'correcta' && justification.length > 5) {
+            document.getElementById('error4').style.display = 'none';
+            showStation('station4', 'station5');
+        } else {
+            document.getElementById('error4').style.display = 'block';
+        }
+    }
+
+    function validateStation5() {
+        const c1 = document.getElementById('s5_concepto').value;
+        const c2 = document.getElementById('s5_fuente').value;
+        const c3 = document.getElementById('s5_consigna').value;
+        const c4 = document.getElementById('s5_evidencia').value;
+        const c5 = document.getElementById('s5_retro').value;
+
+        if(c1 && c2 && c3 && c4 && c5) {
+            document.getElementById('error5').style.display = 'none';
+            showStation('station5', 'final');
+        } else {
+            document.getElementById('error5').style.display = 'block';
+        }
+    }
+</script>
+
+</body>
+</html>
